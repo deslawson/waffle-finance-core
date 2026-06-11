@@ -3,7 +3,7 @@
   "compilerOptions": {
     "lib": ["ES2022"],
     "outDir": "dist",
-    "rootDir": ".",
+    "rootDir": "src",
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["node"]

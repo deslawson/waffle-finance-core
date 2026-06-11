@@ -60,7 +60,7 @@ jobs:
         run: pnpm --filter @wafflefinance/contracts compile
 
       - name: Test — contracts (Hardhat)
-        run: pnpm --filter @wafflefinance/contracts exec hardhat test test/v2/HTLCEscrow.test.ts test/v2/ResolverRegistry.test.ts
+        run: pnpm --filter @wafflefinance/contracts exec hardhat test test/HTLCEscrow.test.ts test/ResolverRegistry.test.ts
 
   soroban:
     name: Soroban contracts
