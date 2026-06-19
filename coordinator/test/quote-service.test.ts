@@ -35,9 +35,13 @@ function mockCoinGeckoSolResponse(ethUsd: number, solUsd: number): Response {
 /** Advance vitest's fake timer by `ms` and flush the microtask queue. */
 async function advanceAndFlush(ms: number): Promise<void> {
   vi.advanceTimersByTime(ms);
-  // Let pending promises settle.
-  await Promise.resolve();
-  await Promise.resolve();
+  // Drain the full async chain: fetch mock resolves (tick 1), .then on the
+  // Response (tick 2), res.json() resolves (tick 3), cache.set in
+  // _fetchAndCache (tick 4), .finally on the inflight promise (tick 5).
+  // Five ticks covers every async hop inside _fetchFromUpstream.
+  for (let i = 0; i < 5; i++) {
+    await Promise.resolve();
+  }
 }
 
 // ---------------------------------------------------------------------------
